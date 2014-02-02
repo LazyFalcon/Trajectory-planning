@@ -9,7 +9,6 @@ function robot = addMatrice(robot, Rx, Tx, Tz, Rz, zmie)
   if w_dot([1 1 1 1], zmie) == 1
     robot.jointWeight = [robot.jointWeight; 1];
   end
-   robot.mat{end+1} = mA(Rx, Tx, Tz, Rz);
  
    robot.part(end+1).module.val = [Rx Tx Tz Rz];
    robot.part(end).module.zmie = zmie;

@@ -52,7 +52,7 @@ robot.bindGP = response{1};
     end
     drawRobot(robot, gp);
     %%
-    response = jacobi_IK_oriented(robot, [0 0 0 0 0 0]*pi/180, path2{2}(300,:), [0 0 -1 0], 0.01, 500);
+    response = jacobi_IK(robot, [0 0 0 0 0 0]*pi/180, t1(1,:),  0.01, 500);
 tmp = robot.bindGP;
 robot.bindGP = response{1};
  drawRobot(robot, response{1});
