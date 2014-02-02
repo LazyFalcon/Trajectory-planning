@@ -1,0 +1,8 @@
+figure(2)
+plot(gps_1_2{1})
+hfig = figure(2)
+set(hfig, 'Position', [200 200 600 300])
+xlabel('[-]')
+ylabel('rad')
+legend('1', '2', '3', '4', '5', '6', '7', '8')
+title('Wspó³¿edne z³¹czowe dla trasy 1-2')
