@@ -11,7 +11,7 @@ function out = simulateRobotFi(robot, fi)
         for j = 1:1:robot.parts
             v = part(j).module.val;
             if sum(part(j).module.zmie.*[1 1 1 1]) == 1
-                z = part(j).module.zmie * fi(i,partval) + v;
+                z = part(j).module.zmie * fi(i, partval) + v;
                 partval = partval+1;
             else
                 z = v;
@@ -22,11 +22,11 @@ function out = simulateRobotFi(robot, fi)
                   0,          sin(z(4)),          cos(z(4)),         z(2);
                   0,                0,                0,          1];
         end
-        if i ~= 1
+%         if length(fi(:,1))~= 1
             out(i,:) = (trans*[0 0 0 1]' + robot.initialPosition')';
-        else 
-            out = (trans*[0 0 0 1]' + robot.initialPosition')';
-        end
+%         else 
+%             out = (trans*[0 0 0 1]' + robot.initialPosition')';
+%         end
     end
     
 end

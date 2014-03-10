@@ -3,7 +3,6 @@ clc
 robot = genEmptyRobot();
 a1 = 50;
 a2 = 600;
-a2x = 50;
 a3 = 400;
 a4 = 400;
 a5 = 200;
