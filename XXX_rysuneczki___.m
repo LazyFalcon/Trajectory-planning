@@ -65,9 +65,9 @@ k=k+1;
 p = w(k,:)-(w(k,:) - w(k+1,:))/3 + [0 0 25 0];
 text(p(1), 0, p(3),'     A4 = 50mm','HorizontalAlignment','left','FontSize',10);
 
-
-hFig = figure(1);
-set(hFig, 'Position', [100 100 450 300])
+%%
+hFig = figure(2);
+set(hFig, 'Position', [100 100 450 400])
 %% do DH 3.2 LUW
 
 

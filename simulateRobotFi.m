@@ -17,10 +17,10 @@ function out = simulateRobotFi(robot, fi)
                 z = v;
             end
 
-            trans = trans*[  cos(z(4)), -sin(z(4))*cos(z(1)),  sin(z(4))*sin( z(1)), (z(2))*cos(z(4));
-                                            sin(z(4)),  cos(z(4))*cos(z(1)), -cos( z(4))*sin(z(1)),  (z(2))*sin(z(4));
-                                            0,             sin(z(1)),             cos( z(1)),             (z(3));
-                                            0,                      0,                      0,            1];
+            trans = trans* [ cos(z(1)), -cos(z(4))*sin(z(1)),  sin(z(1))*sin(z(4)), z(3)*cos(z(1));
+                  sin(z(1)),  cos(z(1))*cos(z(4)), -cos(z(1))*sin(z(4)), z(3)*sin(z(1));
+                  0,          sin(z(4)),          cos(z(4)),         z(2);
+                  0,                0,                0,          1];
         end
         if i ~= 1
             out(i,:) = (trans*[0 0 0 1]' + robot.initialPosition')';

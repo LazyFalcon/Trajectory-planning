@@ -33,17 +33,14 @@ function vec = drawRobot(robot, gp, str, gr, drawAxes, transform)
             idx = 1;
     for i = 1:1:robot.parts;        
             
-             
+             if robot.part(i).module.zmie(2)==1 ||robot.part(i).module.zmie(3)==1
+              drawPoint3d(p1, 'bs', gr);
               
-            if robot.part(i).module.zmie(1)==1 
+            elseif robot.part(i).module.zmie(1)==1 
               drawPoint3d(p1, 'bo', gr);
-                  axis = trans*[0 0 1 0]';
-              drawLine3d(p1-axis*100, p1+axis*100, 'k--', 1.5);
               
             elseif  robot.part(i).module.zmie(4)==1
               drawPoint3d(p1, 'bo', gr);
-                  axis = trans*[1 0 0 0]';
-              drawLine3d(p1-axis*100, p1+axis*100, 'k--', 1.5);
             end
             if strcmp(drawAxes, 'first')
                 x = w_normalize((trans*[1 0 0 0]')');
@@ -60,19 +57,10 @@ function vec = drawRobot(robot, gp, str, gr, drawAxes, transform)
             else
                 trans = trans*substitution(0, robot.part(i).module);
             end
+					 
             p2 = trans*[0 0 0 1]' + robot.initialPosition';
             drawLine3d(p1,p2, str, gr);
             
-            if robot.part(i).module.zmie(2)==1 ||robot.part(i).module.zmie(3)==1
-              drawPoint3d(p2, 'bs', gr);
-              if robot.part(i).module.zmie(2)==1
-                  axis = trans*[0 0 1 0]';
-              else
-                  axis = trans*[1 0 0 0]';
-              end
-              drawLine3d(p2-axis*100, p2+axis*100, 'k--', 1.5);
-              
-            end
             if strcmp(drawAxes, 'last')
                 x = w_normalize((trans*[1 0 0 0]')');
                 y =w_normalize( (trans*[0 1 0 0]')');

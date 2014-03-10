@@ -60,23 +60,27 @@ robot.efector_radius = 5;
  
 %% draw bind pose
     figure(1)
-% drawRobot(robot, robot.bindGP, 'k', 2,);
-drawRobot(robot, gps_2_3{1}(50,:),'k',3, 'none');
+robot.initialPosition = [0 0 203 0];
+drawRobot(robot,  [0 0 0 0 0 90]*pi/180, 'k', 2);
+% drawRobot(robot, gps_2_3{1}(50,:),'k',3, 'none');
 %%0
 %  close(1)
  figure(1)
-axis([-300 650 -600 350 -10 940])
+axis([-3 500 -350 350 -10 940])
 xlabel('mm');
 ylabel('mm');
 view([45 0])
 zlabel('mm');
 hold on
 %%
- drawRobotCollShapes(robot, robot.bindGP);
+robot.initialPosition = [0 0 203 0];
+ drawRobotCollShapes(robot, [0 0 0 0 0 90]*pi/180);
+robot.initialPosition = [600 0 203 0];
+ drawRobotCollShapes(robot, [-90 0 0 0 0 90]*pi/180);
  hold on
  %% CollShapes
 %  close(1)
- figure(1)
+ figure(2)
 %     drawRobot(robot, robot.bindGP);
     shapes = {};
 %     shapes{1} = OOBB([ 200 300 0 1], [200 300 800 1], 0, 40,40);

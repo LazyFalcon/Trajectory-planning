@@ -22,7 +22,7 @@ function out = computeGPOriented(robot, points, orientation, delay, error, limit
 %     gps = zeros(length(points(:,1)), length(current_gp));
     len = length(points(:,1));
     
-    orientationGPs = Orient(robot, current_gp, orientation);
+    orientationGPs = Orient(robot, current_gp, orientation, error);
     gps = orientationGPs;
     current_gp = orientationGPs(end,:);
     
