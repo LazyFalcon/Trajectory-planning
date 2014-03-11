@@ -1,5 +1,28 @@
 function drawCollShape(collShape, str, gr)
-% rysuje ksztalt kolizyjny,sciany maj¹ alfê 0.5
+% Description
+% .........................................................................
+% Autor:                    Karol Wajs
+% Date updating:            23.01.2014 r
+%
+% .........................................................................
+% 
+% 
+% 
+% 
+%
+% Input data:
+% shape
+% str
+% gr - nie u¿ywane
+% 
+% 
+% 
+% Output data:
+% 
+% 
+% .........................................................................
+
+%%
     if nargin<2
        str='b';
        gr=0.5;

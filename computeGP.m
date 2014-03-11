@@ -1,5 +1,29 @@
 function out = computeGP(robot, points, delay, error, limit, print)
-    
+% Description
+% .........................................................................
+% Autor:                    Karol Wajs
+% Date updating:            23.01.2014 r
+%
+% .........................................................................
+% 
+% 
+% 
+% 
+%
+% Input data:
+% robot
+% points
+% delay - co który punkt policzyæ
+% error - dla jacobi_ik, precyzja
+% limit - dla jacobi_ik
+% print - boolean 
+%
+% Output data:
+% gps dla punktów 1:delay:end
+% 
+% .........................................................................
+
+%%
 
     bad_indices = [];
     gps = [];

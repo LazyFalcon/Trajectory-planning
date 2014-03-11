@@ -1,4 +1,28 @@
 function hold = drawPoint3d(point, str, gr)
+% Description
+% .........................................................................
+% Autor:                    Karol Wajs
+% Date updating:            23.01.2014 r
+%
+% .........................................................................
+% 
+% 
+% 
+% 
+%
+% Input data:
+% points
+% 
+% 
+% 
+% 
+% 
+% Output data:
+% uchwyt do narysowanego obiektu
+% 
+% .........................................................................
+
+%%
     if nargin<2
        str='bo';
        gr=0.5;

@@ -1,6 +1,29 @@
 function hold = drawLine3d(a,b, str, gr)
-    %rysuje liniê pomiêdzy punktami
-    %normalniej niz matlab
+% Description
+% .........................................................................
+% Autor:                    Karol Wajs
+% Date updating:            23.01.2014 r
+%
+% .........................................................................
+% 
+% 
+% 
+% 
+%
+% Input data:
+% a,b - points
+% 
+% 
+% 
+% 
+% 
+% Output data:
+% uchwyt do narysowanego obiektu
+% 
+% .........................................................................
+
+%%
+
     if nargin<3
        str='b';
        gr=0.5;

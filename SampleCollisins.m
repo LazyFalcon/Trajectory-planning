@@ -23,7 +23,7 @@ robot = addMatrice(robot,  0,a7, 0, 0, [0,0,0,1]);
 robot = addMatrice(robot,  -pi/2,a8, 0, 0, [1,0,0,0]);
 
 % wartoœæ wyjœciowych wspó³¿ednych z³aczowych
-robot.bindGP = [0 0 0 0 0 90]*pi/180;
+robot.bindGP = [0 0 0 0 0 0]*pi/180;
 
 robot.initialPosition = [0 0 203 0];
 robot.min = [-170 -100 -29  -190 -120 -360 ]*pi/180;
@@ -31,9 +31,9 @@ robot.max = [170 135 256 190 120 360]*pi/180;
 robot.max_v = [328 300 375 375 375 600]*pi/180;
 robot.max_a = [1 1 1 1 1 1]*0.05;
 robot.efector_radius = 5;
-% drawRobot(robot, robot.bindGP,'k',3, 'first');
-% view([0 0])
-% axis([-10 600 -200 200 200 800])
+drawRobot(robot, robot.bindGP,'k',3, 'first');
+view([0 0])
+axis([-10 600 -200 200 200 800])
  %% addCollShapes, definitywnie do dopracowania
    robot.shape = {};
    robot.shapeDelay = {};

@@ -16,11 +16,11 @@ function out = Orient(robot, current_gp, orientation, error, limit)
     aim = initial_points(end, :) ;
     delta_prev = 0;
 %     errors = [];
-        delta = [10 10 10 0];
+    
         e = error*2;
         prev_e = e;
         i = 0;        
-            while (e>error/1000 || w_len(delta) > error) && i < limit
+            while e>error && i < limit
                 jacobi = w_jacobian(current_gp,  robot);
                 jacobi = jacobi';
                 jjp = jacobi'*jacobi;

@@ -1,5 +1,29 @@
 function out = computeGPOriented(robot, points, orientation, delay, error, limit, print)
-    
+% Description
+% .........................................................................
+% Autor:                    Karol Wajs
+% Date updating:            23.01.2014 r
+%
+% .........................................................................
+% 
+% 
+% 
+% 
+%
+% Input data:
+% robot
+% points
+% orientation
+% delay - co który punkt policzyæ
+% error - dla jacobi_ik, precyzja
+% limit - dla jacobi_ik
+% print - boolean 
+%
+% Output data:
+% gps dla punktów 1:delay:end
+% 
+% .........................................................................
+
     bad_indices = [];
     gps = [];
     
@@ -22,7 +46,7 @@ function out = computeGPOriented(robot, points, orientation, delay, error, limit
 %     gps = zeros(length(points(:,1)), length(current_gp));
     len = length(points(:,1));
     
-    orientationGPs = Orient(robot, current_gp, orientation, error);
+    orientationGPs = Orient(robot, current_gp, orientation);
     gps = orientationGPs;
     current_gp = orientationGPs(end,:);
     

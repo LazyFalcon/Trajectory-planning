@@ -14,7 +14,7 @@ end
     sampling = 1; %mm
 %     move_time = sampling/efector_vel; % s
     move_time = 0.01;% sekundy
-    gp = [gps(1,:); gps(1,:); gps(1,:); gps ; gps(end,:); gps(end,:); gps(end,:); gps(end,:)];
+    gp = [gps(1,:); gps(1,:); gps(1,:); gps ; gps(end,:); gps(end,:); gps(end,:)];
     len = length(gp(:,1));
     dt = ones(len-1,1)*sampling/efector_vel; % czasy pomiêdzy kazdym punktem
            
@@ -39,7 +39,7 @@ end
 
         gp = cutAccelerations(robot, gp, accelerations, dt,move_time);
         
-%             obcinanie niepotrzebnych zer na koñcu
+            % obcinanie niepotrzebnych zer na koñcu
             to_cut = 0;
             zer = zeros(size(gp(1,:)));
             for i = length(dt):-1:1
@@ -67,7 +67,7 @@ end
          times(end) = times(end-1) + dt(end);
          
         path = simulateRobotFi(robot, gps);
-        pts = simulateRobotFi(robot, gp);
+        pts = simulateRobotFi(robot, q);
         out{1} = pts;
         out{2} = gp;
         out{3} = times;
@@ -77,21 +77,20 @@ end
             hFig = figure(2);
 %            hold on
             plot(times, gp,'','LineWidth',1.5);
-%             plot(gp,'','LineWidth',1.5);
-            title('Wspó³rzêdne')
+%             title('Wspó³rzêdne')
             xlabel('[s]')
             ylabel('[rad]')
             legend('1','2','3','4','5','6')
-            set(hFig, 'Position', [100 100 500 500])
+            set(hFig, 'Position', [100 100 500 300])
             
             hFig = figure(30);
 %            hold on
             plot(vel,'LineWidth',1.5);
-            title('Prêdkoœci')    
+%             title('Prêdkoœci')    
             xlabel('[-]')
             ylabel('[rad/s]')
             legend('1','2','3','4','5','6')
-            set(hFig, 'Position', [100 100 500 500])
+            set(hFig, 'Position', [100 100 500 300])
             
         figure(40)
             acc =  doAccelerations(robot, vel, dt,move_time);
@@ -103,7 +102,7 @@ end
         figure(1)
             hold on
             drawPath3d(pts, 'b-.', 2);
-            drawPath3d(path, 'k.',1.5);
+            drawPath3d(path, 'k',1.5);
             title('Porownanie tras')
             xlabel('[mm]')
             ylabel('[mm]')
@@ -119,9 +118,8 @@ function out = interpolateGP(dt, gps, move_time)
     for i = 1:1:length(dt)
         times(i+1) = times(i) + dt(i);
     end
-    t = 0:move_time:times(end);
+    t = 0:move_time:times(end)+move_time;
     out = interp1(times, gps, t,'cubic');
-    out = interp1(times, gps, t,'linear');
 end
 
 function out = doVelocities(robot, gps, dt,move_time)
@@ -147,15 +145,14 @@ end
 function out = cutAccelerations(robot, gp, acc, dt,move_time)
     st = 1;
     en = 1;
+    lastid = length(acc);
     bool = false;
-    delay = 10;
 
     for q = 1:1:length(acc(1,:))
         max_a = robot.max_a(q);
-        lastid = length(acc);
 %         for i = 1:1:length(acc)
             i = 0;
-            while i < lastid
+            while i < length(acc)
                 i = i+1;
                 
                 if abs(acc(i, q)) > max_a&& bool == false
@@ -163,13 +160,14 @@ function out = cutAccelerations(robot, gp, acc, dt,move_time)
                     bool = true;
                 end
 
-                if (abs(acc(i, q)) < max_a || i == lastid-1) && bool == true
+                if (abs(acc(i, q)) < max_a || i == lastid) && bool == true
                     bool = false;
                     first = false;
                     last = false;
                     en = i;
                     
                     %% rozszerzamy zakres
+                    delay = 10;
 										
                     if st > delay
                         st = st - delay;
@@ -219,35 +217,15 @@ function out = cutAccelerations(robot, gp, acc, dt,move_time)
                          dt(j) = dt(j) * delays(it);
                          it = it+1;
                      end
-                      
+                        gp = interpolateGP(dt, gp, move_time);
+                        len = length(gp(:,1));
+                        dt = ones(len-1,1)*move_time; % czasy pomiêdzy kazdym punktem
+                        velocities = doVelocities(robot, gp, dt,move_time);
+                        acc = doAccelerations(robot, velocities, dt, move_time);     
                 end
-                
-                if (abs(acc(i, q)) > 1  && i == lastid-1) && bool == false
-                    st = lastid - delay*2;
-                    en = lastid;
-                     bez = [
-                            0 1 0 1; 
-                            1 1 0 4; 
-                            0 1.3 0 0.1;
-                            1 1.3 0 1
-                            ];
-                        len = ceil((en - st)/2);
-                        t = 0:1/len/2:1;
-                        points = bezier4(bez, t, 3);
-                        delays = [points(:,2);];
-                    it = 1;
-                     for j = st:1:en-1
-                         dt(j) = dt(j) * delays(it);
-                         it = it+1;
-                     end 
-                end
-                
+
             end
-            gp = interpolateGP(dt, gp, move_time);
-            len = length(gp(:,1));
-            dt = ones(len-1,1)*move_time; % czasy pomiêdzy kazdym punktem
-            velocities = doVelocities(robot, gp, dt,move_time);
-            acc = doAccelerations(robot, velocities, dt, move_time);     
+            
             bool = false;
     end
     out = gp;

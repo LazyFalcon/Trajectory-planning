@@ -1,5 +1,28 @@
 function hold = drawPath3d(path, str, gr)
-    %rysuje trajektorê w 3d, na podstawie kolejnych punktów(vectory 4elementowe),
+% Description
+% .........................................................................
+% Autor:                    Karol Wajs
+% Date updating:            23.01.2014 r
+%
+% .........................................................................
+% 
+% 
+% 
+% 
+%
+% Input data:
+% path - punkty u³ozone wierszami
+% 
+% 
+% 
+% 
+% 
+% Output data:
+% uchwyt do narysowanego obiektu
+% 
+% .........................................................................
+
+%%
     if nargin<2
        str='b';
        gr=0.5;

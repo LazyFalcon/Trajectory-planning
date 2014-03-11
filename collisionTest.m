@@ -1,10 +1,30 @@
 function out = collisionTest(robot, gps, shapes, print)
-    % dla kazdej konfiguracji sprawdzamy kolizje robota z otoczeniem
-    % 11:20 wypad!
-    % dla ka¿dej konfiguracji, dla ka¿dego cz³onu 
-    % na wyjœciu jest tablica zawieraj¹ca indeks punku, cz³onu, kszata³u
-    % dla których zasz³a kolizja
-    
+% Description
+% .........................................................................
+% Autor:                    Karol Wajs
+% Date updating:            23.01.2014 r
+%
+% .........................................................................
+% 
+% 
+% 
+% 
+%
+% Input data:
+% robot
+% gps
+% shapes
+% print - boolean, yes or no
+% 
+% 
+% Output data:
+% matrix: w wierszach:
+%		indeks punktu, cz³onu, kszta³tu dla którego zasz³a kolizja
+% 
+% .........................................................................
+
+%%
+  
     out = [];
     if isempty(gps)
         return

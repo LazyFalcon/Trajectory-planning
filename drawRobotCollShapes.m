@@ -1,7 +1,28 @@
 function  drawRobotCollShapes(robot, gp, str, gr)
-%     rysuje kszta³ty kolizyjne robota
-%     gp: pozycja w którem ma byc narysowany
-%     str, gr: ~~
+% Description
+% .........................................................................
+% Autor:                    Karol Wajs
+% Date updating:            23.01.2014 r
+%
+% .........................................................................
+% 
+% 
+% 
+% 
+%
+% Input data:
+% robot
+% gp
+% str
+% gr
+% 
+% 
+% Output data:
+% 
+% 
+% .........................................................................
+
+%%
     if nargin<3
        str = 'm';
        gr = 1;

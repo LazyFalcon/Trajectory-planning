@@ -14,31 +14,34 @@ a8 = 30;
 
 % robot = addMatrice(robot,  0, 0, 0, -pi/2,          [0,0,0,0]);
 
-robot = addMatrice(robot,  0, a1, 0, 0,          [0,1,0,0]);
-robot = addMatrice(robot,  0, 0, a2, -pi/2,          [0,0,0,0]);
+robot = addMatrice(robot,  -pi/2, a2, a1, 0,          [0,0,1,0]);
+% robot = addMatrice(robot,  0, 0, a2, 0,          [0,0,0,0]);
 
-robot = addMatrice(robot,  0, 0, a3, pi/2,          [1,0,0,0]);
+robot = addMatrice(robot,  pi/2, a3, 0, 0,          [0,0,0,1]);
 
-robot = addMatrice(robot,  pi/2, 0, a4, 0,                 [1,0,0,0]);
-robot = addMatrice(robot,  0, 0, a5, 0,                 [0,0,0,1]);
+robot = addMatrice(robot,  -pi/2,  a4+a5,0, 0,                 [0,0,0,1]);
+robot = addMatrice(robot,  0, 0, 0, 0,                 [1,0,0,0]);
 
 
 
 % wartoœæ wyjœciowych wspó³¿ednych z³aczowych
-robot.bindGP = [100 0.4 -0.5  0];
+robot.bindGP = [500 0 0.1  0];
+% robot.bindGP = [400 0.3 -0.1  0]; %>     1552.5   -59.9    155.4    1
 
 robot.initialPosition = [0 0 0 0];
 robot.min = [0 -90 -180  -360]*pi/180;
-robot.max = [1000*180/pi 90 22 360]*pi/180;
+robot.max = [0 90 22 360]*pi/180;
+robot.max(1) = 1000; 
 robot.max_v = [328 300 375 375 375 600]*pi/180;
 robot.max_a = [1 1 1 1 1 1]*0.05;
 robot.efector_radius = 5;
+robot.tweak = 800000;
 % close(1)
+ figure(1)
 drawRobot(robot,  robot.bindGP, 'k', 3);
 simulateRobotFi(robot, robot.bindGP)
- figure(1)
  %%
-% axis([-1000 2100 -1500 1500 -1000 2100])
+axis([-1000 2100 -1500 1500 -1000 2100])
 xlabel('[mm]');
 ylabel('[mm]');
 % view([20 45])

@@ -1,4 +1,4 @@
-function robot = addMatrice(robot, Rz, Tz, Tx, Rx, zmie)
+function robot = addMatrice(robot, Rx, Tx, Tz, Rz, zmie)
 
   robot.max(end+1) =  1000;
   robot.min(end+1) = -1000;
@@ -7,14 +7,15 @@ function robot = addMatrice(robot, Rz, Tz, Tx, Rx, zmie)
   robot.bindGP(end+1) = 0;
   robot.zmie =  [robot.zmie; zmie];
   if w_dot([1 1 1 1], zmie) == 1
-    robot.jointWeight = [robot.jointWeight; 1];
+	robot.jointWeight = [robot.jointWeight; 1];
   end
+   % robot.mat{end+1} = mA(Rx, Tx, Tz, Rz);
  
-   robot.part(end+1).module.val = [Rz, Tz, Tx, Rx];
+   robot.part(end+1).module.val = [Rx Tx Tz Rz];
    robot.part(end).module.zmie = zmie;
    
-%    robot.parts = length(robot.mat);
-   robot.parts = robot.parts + 1;
+   % robot.parts = length(robot.mat);
+   robot.parts = robot.parts+1;
    
    
 end

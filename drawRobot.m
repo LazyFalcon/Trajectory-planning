@@ -1,10 +1,28 @@
 function vec = drawRobot(robot, gp, str, gr, drawAxes, transform)
-%     rysuje robota
-%     gp: pozycja w którem ma byc narysowany
-%     str, gr: ~~
-% 		transform jest nieu¿ywalana, wartoœæ jedynie testowa0 
-% drawAxes: rysuje osie uk³adu wspó³¿ednych lokalne, first rysuje osie
-% doko³a których wykonuj¹ siê przekszta³cenia, last rysuje osie lokalne
+% Description
+% .........................................................................
+% Autor:                    Karol Wajs
+% Date updating:            23.01.2014 r
+%
+% .........................................................................
+% 
+% 
+% 
+% 
+%
+% Input data:
+% robot
+% konfiguracja w której ma byc narysowany
+% drawAxes - first lub last, string, first rysuje LUW, last rysuje LUW po przekszta³ceniach
+% transform - nie uzywana
+% 
+% 
+% Output data:
+% wspó³¿êdne kazdego z³¹cza
+% 
+% .........................................................................
+
+%%
 
 
     if nargin<3
@@ -33,17 +51,14 @@ function vec = drawRobot(robot, gp, str, gr, drawAxes, transform)
             idx = 1;
     for i = 1:1:robot.parts;        
             
-             
+             if robot.part(i).module.zmie(2)==1 ||robot.part(i).module.zmie(3)==1
+              drawPoint3d(p1, 'bs', gr);
               
-            if robot.part(i).module.zmie(1)==1 
+            elseif robot.part(i).module.zmie(1)==1 
               drawPoint3d(p1, 'bo', gr);
-                  axis = trans*[0 0 1 0]';
-              drawLine3d(p1-axis*100, p1+axis*100, 'k--', 1.5);
               
             elseif  robot.part(i).module.zmie(4)==1
               drawPoint3d(p1, 'bo', gr);
-                  axis = trans*[1 0 0 0]';
-              drawLine3d(p1-axis*100, p1+axis*100, 'k--', 1.5);
             end
             if strcmp(drawAxes, 'first')
                 x = w_normalize((trans*[1 0 0 0]')');
@@ -53,26 +68,16 @@ function vec = drawRobot(robot, gp, str, gr, drawAxes, transform)
                 drawLine3d(p1, p1' + y*75,'g',2.5);
                 drawLine3d(p1, p1' + z*75,'b',2.5);
             end
-            
             if w_dot(robot.part(i).module.zmie, [1 1 1 1]) == 1
                 trans = trans*substitution(gp(idx), robot.part(i).module);
                 idx = idx +1;
             else
                 trans = trans*substitution(0, robot.part(i).module);
             end
+					 
             p2 = trans*[0 0 0 1]' + robot.initialPosition';
             drawLine3d(p1,p2, str, gr);
             
-            if robot.part(i).module.zmie(2)==1 ||robot.part(i).module.zmie(3)==1
-              drawPoint3d(p2, 'bs', gr);
-              if robot.part(i).module.zmie(2)==1
-                  axis = trans*[0 0 1 0]';
-              else
-                  axis = trans*[1 0 0 0]';
-              end
-              drawLine3d(p2-axis*100, p2+axis*100, 'k--', 1.5);
-              
-            end
             if strcmp(drawAxes, 'last')
                 x = w_normalize((trans*[1 0 0 0]')');
                 y =w_normalize( (trans*[0 1 0 0]')');

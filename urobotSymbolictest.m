@@ -3,7 +3,7 @@ syms d1 d2 real;
 syms q2 real;
 syms q3 real;
 syms q4 real;
-syms z1 z2 z3 z4 real
+syms a1 a2 a3 a4 real
 
 matr = simulateRobotFi(robot, [q1 q2 q3 q4])
 % matr = simulateRobotFiMatrices(robot, [q1 q2 q3 q4]);
@@ -14,13 +14,15 @@ matr = simulateRobotFi(robot, [q1 q2 q3 q4])
 % 
 % mA(z1,z2,z3,z4)
 
-A1 = mA(0, d1+a1, a2, -pi/2);
-A2 = mA(q2, 0, a3, pi/2);
-A3 = mA(pi/2+q3, 0, a4+a5, 0);
+A1 = mA(0, d1, a1, sym(-pi/2));
+A2 = mA(q2, 0, a2, sym(pi/2));
+A3 = mA(q3, a3, a3, 0)*mA(0, 0, 0, sym(-pi/2));
 A4 = mA(0, 0, 0, q4);
+% clc
 
 A1*A2*A3;
-A = A1*A2*A3*A4*[0 0 0 1]';
+% A = A1*A2*A3*A4*[0 0 0 1]'
+A = A1*A2*A3*[0 0 0 1]'
  p = A1*[0 0 0 1]';
 
  
@@ -65,3 +67,16 @@ for i = 1:1:length(gp)
             drawRobot(robot, gp(i,:))
     end
 end
+%% 
+point = [1552.5   0    5.4    1];
+figure(1)
+drawPoint3d(point);
+qq = jacobi_IK(robot, robot.bindGP, point, 0.01, 600);
+% if qq{2} ~= -1
+    qq{1};
+    simulateRobotFi(robot, qq{1})
+    
+figure(1)
+    drawRobot(robot, qq{1});
+% end
+    
