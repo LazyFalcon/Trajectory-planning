@@ -1,0 +1,29 @@
+syms th1 th2 l1 l2 a1 a2 az1 az2 vz1 vz2 m1 m2 I1x I1xy I1xz I1y I1yz I1z I2x I2y I2xz I2xy I2y I2yz I2z Fex Fey gz real
+clc
+gp=[th1 0 a1 0;th2 0 a2 0];
+zmie=[1 0 0 0;1 0 0 0];
+wsp=[-a1/2 0 0 1;-a2/2 0 0 1];
+% T=fun_Te(gp,zmie);
+% a=fun_accel2(gp,zmie,2);
+% ac=fun_accel_c(gp,zmie,wsp,2);
+% pw=[-l2/2;0;0;1];
+% vz=[vz1 vz2];
+% az=[az1 az2];
+% ac2=fun_accel(gp,zmie,2,pw,vz,az);
+% T2=subs(T{1,3},{th1,th2,l1,l2},{pi/4,pi/3,0.7,0.8});
+% aw=subs(a,{th1,th2,l1,l2,az1,az2,vz1,vz2},{pi/4,pi/3,0.7,0.8,1.5,1.3,0.5,0.7});
+% acw=T2*subs(ac,{th1,th2,l1,l2,az1,az2,vz1,vz2},{pi/4,pi/3,0.7,0.8,1.5,1.3,0.5,0.7});
+% ac2w=subs(ac2,{th1,th2,l1,l2,az1,az2,vz1,vz2},{pi/4,pi/3,0.7,0.8,1.5,1.3,0.5,0.7});
+% pw=[0;0;0;1];
+% v=fun_speed(gp,zmie,2,pw,vz);
+% v2=fun_speed2(gp,zmie,2);
+% vw=subs(v,{th1,th2,l1,l2,az1,az2,vz1,vz2},{pi/4,pi/3,0.7,0.8,1.5,1.3,0.5,0.7});
+% v2w=subs(v2,{th1,th2,l1,l2,az1,az2,vz1,vz2},{pi/4,pi/3,0.7,0.8,1.5,1.3,0.5,0.7});
+I=cell(1,2);
+I{1}=[I1x I1xy I1xz;I1xy I1y I1yz;I1xz I1yz I1z];
+I{2}=[I2x I2y I2xz;I2xy I2y I2yz;I2xz I2yz I2z];
+m=[m1 m2];
+gr=[0 gz 0 0];
+Fe=[0;0;0;0];
+Me=[0;0;0;0];
+[F,M]=fun_euler(gp,zmie,wsp,m,gr,Fe,Me,I)

@@ -9,7 +9,7 @@ function out = jacobi_IK(robot, current_gp, aim, error, limit)
       limit = 200;
     end
     
-    err = [];
+%     err = [];
 %     pts = [];
    qcnt = [];
      out{2} = -1;
@@ -55,19 +55,19 @@ function out = jacobi_IK(robot, current_gp, aim, error, limit)
             current_point = simulateRobotFi(robot, current_gp);
             e = w_distance(aim, current_point);
 
-            err = [err, e];
+%             err = [err, e];
         end
-        
+     
         if e < error
             out{2} = 0;
        end
         out{1} = current_gp;
         
-    figure(2)
-    hold on
-    plot(err,'k')
+%     figure(2)
+%     hold on
+%     plot(err,'k')
 %     plot(qcnt)
-    figure(1)
+%     figure(1)
 %     drawPath3d(pts, 'k',1.5);
 end
 

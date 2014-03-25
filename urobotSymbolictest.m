@@ -71,7 +71,9 @@ end
 point = [1552.5   0    5.4    1];
 figure(1)
 drawPoint3d(point);
-qq = jacobi_IK(robot, robot.bindGP, point, 0.01, 600);
+for i=1:1:100
+    qq = jacobi_IK(robot, robot.bindGP, path(i,:) - [100 0 0 0], 0.01, 600);
+end
 % if qq{2} ~= -1
     qq{1};
     simulateRobotFi(robot, qq{1})

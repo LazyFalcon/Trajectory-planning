@@ -35,7 +35,7 @@ function out = computeGP(robot, points, delay, error, limit, print)
     if nargin<4
         limit = 600;
         error = 0.05;
-        print = false
+        print = false;
     elseif nargin<5
       limit = 600;
       print = false;

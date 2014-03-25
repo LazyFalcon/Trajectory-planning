@@ -1,31 +1,33 @@
 
 clc
 robot = genEmptyRobot();
-a1 = 50;
-a2 = 600;
-a3 = 400;
-a4 = 400;
-a5 = 200;
-a6 = 187;
-a7 = 80;
-a8 = 30;
-% [Rz Tz Tx Rx], 0 jesli wartoœæ jest sta³a, 1 jeœli jest zmienna, max
+c1 = 50;
+c2 = 600;
+c3 = 400;
+c4 = 400;
+c5 = 200;
+c6 = 187;
+c7 = 80;
+c8 = 30;
+% [Rx Tx Tz Rz], 0 jesli wartoœæ jest sta³a, 1 jeœli jest zmienna, max
 % jedna 1
 
 % robot = addMatrice(robot,  0, 0, 0, -pi/2,          [0,0,0,0]);
 
-robot = addMatrice(robot,  -pi/2, a2, a1, 0,          [0,0,1,0]);
-% robot = addMatrice(robot,  0, 0, a2, 0,          [0,0,0,0]);
+robot = addMatrice(robot,  -pi/2, 0, 0, 0,          [0,0,1,0]);
+robot = addMatrice(robot,  0, c2, 0, 0,          [0,0,0,0]);
 
-robot = addMatrice(robot,  pi/2, a3, 0, 0,          [0,0,0,1]);
+robot = addMatrice(robot,  pi/2, c3, 0, 0,          [0,0,0,1]);
 
-robot = addMatrice(robot,  -pi/2,  a4+a5,0, 0,                 [0,0,0,1]);
+robot = addMatrice(robot,  -pi/2,  c4+c5,0, 0,                 [0,0,0,1]);
 robot = addMatrice(robot,  0, 0, 0, 0,                 [1,0,0,0]);
 
 
 
 % wartoœæ wyjœciowych wspó³¿ednych z³aczowych
-robot.bindGP = [500 0 0.1  0];
+% robot.bindGP = [500 0.6 0.5  0];
+% robot.bindGP = [500 0 0 0.5];
+robot.bindGP = [500 0 pi/2 0];
 % robot.bindGP = [400 0.3 -0.1  0]; %>     1552.5   -59.9    155.4    1
 
 robot.initialPosition = [0 0 0 0];
@@ -38,10 +40,12 @@ robot.efector_radius = 5;
 robot.tweak = 800000;
 % close(1)
  figure(1)
-drawRobot(robot,  robot.bindGP, 'k', 3);
+% drawRobot(robot,  robot.bindGP, 'k', 3);
+drawRobot(robot,  gp(1,:), 'k', 3);
 simulateRobotFi(robot, robot.bindGP)
- %%
+ %%a
 axis([-1000 2100 -1500 1500 -1000 2100])
+axis([-10 1600 -900 900 -10 1600])
 xlabel('[mm]');
 ylabel('[mm]');
 % view([20 45])
@@ -50,10 +54,10 @@ zlabel('[mm]');
 %%
 % rysujemy pionowy przekrój:
 
-a6 = a3+a4+a5;
+a6 = c3+c4+c5;
 
-o1 = [a2 0 a1 1];
-o2 = [a2 0 a1+1000 1];
+o1 = [c2 0 c1 1];
+o2 = [c2 0 c1+1000 1];
 % drawPoint3d(o1)
 % drawPoint3d(o2)
 hold on
@@ -81,18 +85,18 @@ drawLine3d(b,d, 'b', 2);
 
 
 %% poziomo:
-o3 = [a2+a3 0 a1 1];
+o3 = [c2+c3 0 c1 1];
 % drawPoint3d(o3);
 arc1 = [];
 for fi = pi/2 : -0.01 : 0
     arc1 = [arc1;
-        o3 + (a4+a5)*[cos(fi) sin(fi) 0 0]
+        o3 + (c4+c5)*[cos(fi) sin(fi) 0 0]
     ];
 end
 
 for fi = 2*pi : -0.01 : 3/2*pi
     arc1 = [arc1;
-        o3 + (a4+a5)*[cos(fi) sin(fi) 0 0]
+        o3 + (c4+c5)*[cos(fi) sin(fi) 0 0]
     ];
 end
 
@@ -103,18 +107,18 @@ drawPath3d(arc1, 'b', 2);
 a = arc1(1,:);
 b = arc1(end,:);
 
-o3 = [a2+a3 0 a1+1000 1];
+o3 = [c2+c3 0 c1+1000 1];
 % drawPoint3d(o3);
 arc1 = [];
 for fi = pi/2 : -0.01 : 0
     arc1 = [arc1;
-        o3 + (a4+a5)*[cos(fi) sin(fi) 0 0]
+        o3 + (c4+c5)*[cos(fi) sin(fi) 0 0]
     ];
 end
 
 for fi = 2*pi : -0.01 : 3/2*pi
     arc1 = [arc1;
-        o3 + (a4+a5)*[cos(fi) sin(fi) 0 0]
+        o3 + (c4+c5)*[cos(fi) sin(fi) 0 0]
     ];
 end
 

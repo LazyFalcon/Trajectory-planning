@@ -1,6 +1,6 @@
 % resolwing collisions
 kol = [];
-points = input3D(5);
+points = input3D(2);
 %%
  for i = 1:1:length(points)
      hold on
@@ -20,15 +20,15 @@ p1 = p1+[25 25 0 0];
     points = [points; p1];
 p1 = p1+[25 25 0 0];
 %     points = [points; p1];
-
+%%
 drawPath3d(NURBS(points), 'k');
 drawPath3d(points, 'ko');
 
 %% spline interpolation
-interped = SplineInterpolation(points);
-drawPath3d(interped, 'k');
+path = SplineInterpolation(points);
+drawPath3d(path, 'k');
 %%
-
+shapes = {};
 result = generateFixedPath(robot, interped, shapes);
 %%
 drawPath3d(result,'k',1);
