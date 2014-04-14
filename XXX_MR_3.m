@@ -1,5 +1,5 @@
  %% interp555
- gp = gps{1};
+ gp = gps;
  gp(:,1) = gp(:,1)/1000;
 % t1 = [1 1 1 1 1 1 1]*5;
 V=[0 0];
@@ -13,7 +13,7 @@ trajectory1 = fun_path(gp(:,1)', t1, V, A);
 [xt1,vt1,at1,tt1,ti1] = fun_graph(trajectory1,t1,0.01,'red','-',[0 1 0 0],2,1);
 %%
 zmie = [0 1 0 0];
-t1 = [1 1 1 1 1 1 1]*0.2;
+% t1 = [1 1 1 1 1 1 1]*0.2;
 trajectory2 = fun_path(gp(:,2)', t1, V, A);
 [xt2,vt2,at2,tt2,ti2]=fun_graph(trajectory2,t1,0.01,'red','-',[1 0 0 0],2,1);
 %%d

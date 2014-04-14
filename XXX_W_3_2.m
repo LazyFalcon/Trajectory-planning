@@ -17,8 +17,9 @@ V = x1^2 + x2^2;
 % dV = -2*x2^2 - 6*x2^4;
 dv = simplify(r1*diff(V, x1) + r2*diff(V,x2))
 %% dla 2.4 5 rozwi¹zañ
-i=1;
-dVl = single(subs(dV, {x1, x2}, {out.x1(i), out.x2(i)}))
+% i=1;
+% dVl = single(subs(dV, {x1, x2}, {out.x1(i), out.x2(i)}))
+dVl = single(subs(dv, {x1, x2}, {-0.1,0.1}))
 
 
 %%

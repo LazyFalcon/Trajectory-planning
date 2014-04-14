@@ -1,12 +1,12 @@
 % bezier opisujacy charakterystykê regulacji silnika? 
 bezier = [
  0 1;
- 0 1;
  1 1;
+ 0 1;
  1 1;
  ];
 
-t = 0:0.01:1;
+t = 0:0.001:1;
 resp = bezierN(bezier, t);
 plot(t, resp(:,1))
 hold on
